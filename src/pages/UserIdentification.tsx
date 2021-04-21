@@ -1,4 +1,11 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from "react";
+
+
+import colors from '../styles/colors';
+import fonts from '../styles/fonts';
+import { useNavigation } from '@react-navigation/core';
+import { Toasts } from "../Components/Toast";
+import { Button } from '../Components/Button';
 import {
     KeyboardAvoidingView,
     Platform,
@@ -10,16 +17,14 @@ import {
     TouchableWithoutFeedback,
     Keyboard
 } from 'react-native';
-import { Button } from '../Components/Button';
-import colors from '../styles/colors';
-import fonts from '../styles/fonts';
-import { useNavigation } from '@react-navigation/core';
+
 
 
 export function UserIdentification() {
 
     const [isFocused, setIsFocused] = useState(false);
     const [isFilled, setIsFilled] = useState(false);
+    const [isToastActive, setIsToastActive] = useState(false);
     const [name, setName] = useState<string>();
 
     const navigation = useNavigation();
@@ -38,7 +43,24 @@ export function UserIdentification() {
         setName(value);
     }
 
-    function confirmar() {
+    function handleViewToast (value: boolean) {
+        setIsToastActive(value);
+    }
+
+
+    function handleConfirmar() {
+        if (!name) {
+            Toasts({
+                type: "error",
+                title: "Ops! 😯",
+                content: "Antes de prosseguir, nos informe o seu nome",
+                position: "top",
+                onHide: () => handleViewToast(false),
+                onShow: () => handleViewToast(true),
+            });
+            return;
+        }
+
         navigation.navigate('Confirmation');
     }
 
@@ -60,8 +82,8 @@ export function UserIdentification() {
 
                                 <Text style={styles.title}>
                                     Como podemos {'\n'}
-                                chamar você ?
-                            </Text>
+                                    chamar você ?
+                                </Text>
 
                                 <TextInput
                                     style={[
@@ -76,7 +98,7 @@ export function UserIdentification() {
                                 />
 
                                 <View style={styles.footer}>
-                                    <Button title={"Confirmar"} onPress={confirmar} />
+                                    <Button title={"Confirmar"} onPress={handleConfirmar} />
                                 </View>
 
                             </View>

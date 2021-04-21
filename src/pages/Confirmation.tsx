@@ -16,6 +16,10 @@ export function Confirmation() {
 
     const navigation = useNavigation();
 
+    function handlePlantSelect() {
+        navigation.navigate('PlantSelect');
+    }
+
     return (
         <SafeAreaView style={styles.container}>
 
@@ -34,7 +38,7 @@ export function Confirmation() {
                 </Text>
 
                 <View style={styles.footer}>
-                    <Button title={'Começar'}/>
+                    <Button title={'Começar'} onPress={handlePlantSelect}/>
                 </View>
 
             </View>
