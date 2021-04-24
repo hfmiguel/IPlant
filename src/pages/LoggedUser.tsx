@@ -5,57 +5,42 @@ import {
     View,
     StyleSheet
 } from 'react-native';
- 
+
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 
+import { Header } from './Template/Header';
 import { Button } from '../Components/Button';
-import { useNavigation, useRoute } from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/core';
 
-interface Params{
-    title: string,
-    subtitle: string,
-    buttonTitle: string,
-    icon: "",
-    nextScreen: string,
-}
-
-
-export function Confirmation() {
+export function LoggedUser() {
 
     const navigation = useNavigation();
-    const routes = useRoute();
-
-    const {
-        title,
-        subtitle,
-        icon,
-        buttonTitle,
-        nextScreen
-    } = routes.params as Params
-
+  
     function handlePlantSelect() {
-        navigation.navigate(nextScreen);
+        navigation.navigate("PlantSelect");
     }
 
     return (
         <SafeAreaView style={styles.container}>
 
+            <View style={styles.header}>
+
+                <Header />
+
+            </View>
+
             <View style={styles.content}>
-                <Text style={styles.emoji}>
-                    {icon}
-                </Text>
-
                 <Text style={styles.title}>
-                   {title}
+                    Quem bom termos você de volta!
                 </Text>
 
-                <Text style={styles.subtitle}>
+                {/* <Text style={styles.subtitle}>
                     {subtitle}
-                </Text>
+                </Text> */}
 
                 <View style={styles.footer}>
-                    <Button title={buttonTitle} onPress={handlePlantSelect}/>
+                    <Button title={'Continuar'} onPress={handlePlantSelect} />
                 </View>
 
             </View>
@@ -67,8 +52,11 @@ export function Confirmation() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-around',
+        backgroundColor: colors.background,
+    },
+    header: {
+        paddingHorizontal: 30,
+        paddingVertical: 30
     },
     content: {
         flex: 1,
@@ -91,9 +79,6 @@ const styles = StyleSheet.create({
         fontSize: 17,
         paddingVertical: 10,
         color: colors.heading,
-    },
-    emoji: {
-        fontSize: 78
     },
     footer: {
         width: '100%',

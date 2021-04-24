@@ -7,6 +7,10 @@
         {
             "key": "week",
             "title": "A cada semana"
+        },
+        {
+            "key": "month",
+            "title": "Mensal"
         }
     ],
     "plants_environments": [
@@ -25,6 +29,10 @@
         {
             "key": "bathroom",
             "title": "Banheiro"
+        },
+        {
+            "key": "varand",
+            "title": "Varanda"
         }
     ],
     "plants": [

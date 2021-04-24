@@ -14,14 +14,24 @@ import wateringImage from '../assets/watering.png';
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 import { useNavigation } from '@react-navigation/core';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export function Welcome() {
 
     const navigation = useNavigation();
 
-    function navigate() {
-        navigation.navigate('UserIdentification');
+    async function navigate() {
+
+        const data = await AsyncStorage.getItem('@iplant:user');
+
+        if (typeof data != undefined && data != "") {
+            navigation.navigate('LoggedUser');
+        } else {
+            navigation.navigate('UserIdentification');
+        }
     }
+
+
 
     return (
         <SafeAreaView style={styles.container}>

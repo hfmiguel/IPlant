@@ -1,11 +1,12 @@
-import React, { useCallback, useState } from "react";
-
+import React, { useState , useEffect } from "react";
 
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 import { useNavigation } from '@react-navigation/core';
 import { Toasts } from "../Components/Toast";
 import { Button } from '../Components/Button';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 import {
     KeyboardAvoidingView,
     Platform,
@@ -17,7 +18,6 @@ import {
     TouchableWithoutFeedback,
     Keyboard
 } from 'react-native';
-
 
 
 export function UserIdentification() {
@@ -43,14 +43,14 @@ export function UserIdentification() {
         setName(value);
     }
 
-    function handleViewToast (value: boolean) {
+    function handleViewToast(value: boolean) {
         setIsToastActive(value);
     }
 
 
-    function handleConfirmar() {
+    async function handleConfirmar() {
         if (!name) {
-            Toasts({
+            return Toasts({
                 type: "error",
                 title: "Ops! 😯",
                 content: "Antes de prosseguir, nos informe o seu nome",
@@ -58,10 +58,29 @@ export function UserIdentification() {
                 onHide: () => handleViewToast(false),
                 onShow: () => handleViewToast(true),
             });
-            return;
         }
 
-        navigation.navigate('Confirmation');
+        try {
+
+            await AsyncStorage.setItem("@iplant:user", name);
+            navigation.navigate('Confirmation', {
+                title: 'Prontinho',
+                subtitle: `Agora vamos começar a cuidar das suas\nplantinhas com muito carinho`,
+                icon:'🥰',
+                buttonTitle:'Começar',
+                nextScreen:'PlantSelect'
+            });
+        } catch (error) {
+            return Toasts({
+                type: "error",
+                title: "Ops! 😯",
+                content: "Falha ao salvar o seu nome. Por favor , tente novamente.",
+                position: "top",
+                onHide: () => handleViewToast(false),
+                onShow: () => handleViewToast(true),
+            });
+        }
+
     }
 
     return (
