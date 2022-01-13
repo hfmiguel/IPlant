@@ -8,11 +8,13 @@ services:
     restart: unless-stopped
     volumes:
       - .:/opt
+    entrypoint: ["/bin/sh","-c"]
+    command:
+      - -c
+      - |
+        export env REACT_NATIVE_PACKAGER_HOSTNAME=fxdev.pt
+        npm start
     ports:
       - 19006:19006
       - 19001:19001
       - 19002:19002
-      - 3333:3333
-      - 3000:3000
-      - 3001:3001
-      - 5000:5000
