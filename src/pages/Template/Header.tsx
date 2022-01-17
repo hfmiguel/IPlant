@@ -7,18 +7,25 @@ import {
     Image,
 } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import userImg from '../../assets/felix.jpg';
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
 
-export function Header(){
+export function Header() {
 
     const [userName, setUserName] = useState<string>();
+    const userImg = 'https://avatars.githubusercontent.com/u/14097051?v=4';
 
     useEffect(() => {
         async function getUserName() {
             const user = await AsyncStorage.getItem("@iplant:user");
-            setUserName(user || '');
+
+            if (!user || user == "" || user == null) {
+                const keys = await AsyncStorage.getAllKeys();
+                await AsyncStorage.multiRemove(keys);
+            } else {
+                setUserName(user || '');
+            }
+
         }
         getUserName();
     }, [userName]);
@@ -30,7 +37,7 @@ export function Header(){
                 <Text style={styles.userName}>{userName}</Text>
             </View>
             <View>
-                <Image style={ styles.image } source={userImg} />
+                <Image style={styles.image} source={{ uri : userImg}} />
             </View>
         </View>
     )
@@ -45,7 +52,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingVertical: 20,
         marginTop: getStatusBarHeight(),
-    }, 
+    },
     greeting: {
         fontSize: 32,
         color: colors.heading,

@@ -30,28 +30,43 @@ export function EnvironmentButton({
             ]}
             {...rest}
         >
-            <Text style={[
-                styles.text,
-                active && styles.textActive
+            <View style={[
+                styles.viewContainer,
+                active && styles.containerActive
             ]}>
-                {title}
-            </Text>
+                <Text style={[
+                    styles.text,
+                    active && styles.textActive
+                ]}>
+                    {title}
+                </Text>
+            </View>
         </RectButton>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         backgroundColor: colors.shape,
         width: 76,
         height: 40,
+        marginHorizontal: 5,
+        borderRadius: 12,
+    },
+    viewContainer: {
+        width: '100%',
+        height: '100%',
+        borderColor: colors.purple_light,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderRadius: 12,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 12,
-        marginHorizontal: 5
     },
     containerActive: {
-        backgroundColor: colors.green_light
+        backgroundColor: colors.purple_light,
+        borderColor: colors.white,
     },
     text: {
         color: colors.heading,
@@ -59,6 +74,6 @@ const styles = StyleSheet.create({
     },
     textActive: {
         fontFamily: fonts.heading,
-        color: colors.green_dark,
+        color: colors.white,
     }
 })

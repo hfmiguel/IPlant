@@ -24,7 +24,9 @@ export function Welcome() {
 
         const data = await AsyncStorage.getItem('@iplant:user');
 
-        if (typeof data != undefined && data != "") {
+        console.log("Data :", data);
+
+        if (typeof data != undefined && data != "" && data != null) {
             navigation.navigate('LoggedUser');
         } else {
             navigation.navigate('UserIdentification');

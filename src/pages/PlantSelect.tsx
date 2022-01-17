@@ -155,7 +155,7 @@ export function PlantSelect() {
                     onEndReached={({ distanceFromEnd }) => handleFetchMore(distanceFromEnd)}
                     ListFooterComponent={
                         loadMore 
-                            ? <ActivityIndicator color={colors.green} />
+                            ? <ActivityIndicator color={colors.purple} />
                             : <></>
                     }
                 />
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
         height: 40,
         justifyContent: 'center',
         paddingBottom: 5,
-        marginVertical: 32
+        marginVertical: 32,
     },
     plants: {
         flex: 1,

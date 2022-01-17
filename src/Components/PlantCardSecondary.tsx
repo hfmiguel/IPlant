@@ -37,26 +37,30 @@ export function PlantCardSecondary({ data, handleRemove, ...rest }: PlantProps) 
                 style={styles.container}
                 {...rest}
             >
-                <SvgFromUri uri={data.photo} width={50} height={50} />
-                <Text style={styles.title}>
-                    {data.name}
-                </Text>
-                <View style={styles.details}>
-                    <Text style={styles.timeLabel}>
-                        Regar às
-          </Text>
-                    <Text style={styles.time}>
-                        {data.hour}
+                <View style={styles.viewContainer}>
+                    <SvgFromUri uri={data.photo} width={50} height={50} />
+                    <Text style={styles.title}>
+                        {data.name}
                     </Text>
+                    <View style={styles.details}>
+                        <Text style={styles.timeLabel}>
+                            Regar às
+                        </Text>
+                        <Text style={styles.time}>
+                            {data.hour}
+                        </Text>
+                    </View>
                 </View>
             </RectButton>
-        </Swipeable>
+        </Swipeable >
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         width: '100%',
+    },
+    viewContainer: {
         paddingHorizontal: 10,
         paddingVertical: 25,
         borderRadius: 20,
@@ -64,28 +68,33 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: colors.shape,
         marginVertical: 5,
+        borderWidth: 1,
+        borderColor: colors.purple_light,
+        borderStyle: 'solid'
     },
     title: {
         flex: 1,
         marginLeft: 10,
         fontFamily: fonts.heading,
         fontSize: 17,
-        color: colors.heading
+        color: colors.purple_light
     },
     details: {
         alignItems: 'flex-end',
         marginRight: 6,
+        color: colors.purple_light
+
     },
     timeLabel: {
         fontSize: 16,
         fontFamily: fonts.text,
-        color: colors.body_light,
+        color: colors.purple_light,
     },
     time: {
         marginTop: 5,
         fontSize: 16,
         fontFamily: fonts.heading,
-        color: colors.body_dark
+        color: colors.purple_dark
     },
     buttonRemove: {
         width: 100,

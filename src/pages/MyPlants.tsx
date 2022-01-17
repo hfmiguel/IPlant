@@ -108,7 +108,9 @@ const styles = StyleSheet.create({
         backgroundColor: colors.background
     },
     spotlight: {
-        backgroundColor: colors.blue_light,
+        backgroundColor: colors.purple_light,
+        borderColor: colors.purple_dark,
+        borderWidth: 1,
         paddingHorizontal: 20,
         borderRadius: 20,
         height: 110,
@@ -122,7 +124,7 @@ const styles = StyleSheet.create({
     },
     spotlightText: {
         flex: 1,
-        color: colors.blue,
+        color: colors.white,
         paddingHorizontal: 20,
     },
     plants: {

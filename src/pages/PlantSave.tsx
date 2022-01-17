@@ -133,12 +133,13 @@ export function PlantSave() {
 
                     <Text style={styles.alertLabel}>
                         Ecolha o melhor horário para ser lembrado:
-                </Text>
+                    </Text>
+
                     {showDatePicker &&
                         <DateTimePicker
                             value={selectedDateTime}
                             mode='time'
-                            display='spinner'
+                            display='default'
                             onChange={handleChangeTime}
                         />
                     }
@@ -201,7 +202,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: colors.blue_light,
+        backgroundColor: colors.purple_light,
+        borderColor: colors.purple_dark,
+        borderWidth: 1,
         padding: 20,
         borderRadius: 20,
         position: 'relative',
@@ -215,7 +218,7 @@ const styles = StyleSheet.create({
         flex: 1,
         marginLeft: 20,
         fontFamily: fonts.text,
-        color: colors.blue,
+        color: colors.white,
         fontSize: 17,
         textAlign: 'center',
     },

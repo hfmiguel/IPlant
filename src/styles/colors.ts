@@ -1,15 +1,21 @@
 export default {
-  green: '#32B768',
-  green_dark: '#2B7A4B',
-  green_light: '#DAF2E4',
+  
+  purple_light: '#8D40FF',
+  purple: '#823EE9',
+  purple_dark: '#7035CA',
 
-  heading: '#52665A',
+  heading: '#663BA8',
+
+  inactiveMenu: '#9047FF',
+  activeMenu: '#663BA8',
+
   body_dark: '#738078',
   body_light: '#AAB2AD',
 
-  background: '#FFFFFF',
+  background: '#FFF',
+
   shape: '#F0F0F0',
-  white: '#FFFFFF',
+  white: '#FFF',
   gray: '#CFCFCF',
 
   blue: '#3D7199',

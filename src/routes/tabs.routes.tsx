@@ -12,8 +12,8 @@ const AuthRoutes: React.FC = () => {
     return (
         <AppTab.Navigator
             tabBarOptions={{
-                activeTintColor: colors.green,
-                inactiveTintColor: colors.heading,
+                activeTintColor: colors.activeMenu,
+                inactiveTintColor: colors.inactiveMenu,
                 labelPosition: 'beside-icon',
                 style: {
                     paddingVertical: Platform.OS === 'ios' ? 20 : 0,

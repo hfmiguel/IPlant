@@ -32,7 +32,7 @@ export function LoggedUser() {
 
             <View style={styles.content}>
                 <Text style={styles.title}>
-                    Quem bom termos você de volta!
+                    Que bom termos você de volta!
                 </Text>
 
                 {/* <Text style={styles.subtitle}>

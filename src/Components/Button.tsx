@@ -25,7 +25,9 @@ export function Button({ title, ...rest } : ButtonProps ) {
 
 const style = StyleSheet.create({
     container: {
-        backgroundColor: colors.green,
+        backgroundColor: colors.purple_light,
+        borderColor: colors.purple_dark,
+        borderWidth: 1,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 16,
