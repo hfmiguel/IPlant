@@ -38,7 +38,7 @@ export const PlantCardPrimary = ({ data, ...rest }: PlantProps) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        maxWidth: '45%',
+        maxWidth: '50%',
     },
     viewContainer: {
         backgroundColor: colors.shape,

@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { format } from 'date-fns';
+import * as Google from 'expo-google-app-auth';
 
 export interface PlantProps {
     id: string;
@@ -14,6 +15,14 @@ export interface PlantProps {
     },
     dateTimeNotification: Date;
     hour: string;
+}
+
+export interface UserProps {
+    id?: string;
+    familyName?: string;
+    givenName?: string;
+    name: string;
+    photoUrl?: string;
 }
 
 export interface StoragePlantProps {
@@ -43,14 +52,14 @@ export async function savePlant(plant: PlantProps): Promise<void> {
             })
         );
     } catch (error) {
-        throw new Error(error);
+        console.log(error);
     }
 }
 
 export async function loadPlant(): Promise<PlantProps[]> {
     try {
         const data = await AsyncStorage.getItem('@iplant:plants');
-        const plants = data ? (JSON.parse(data) as StoragePlantProps) : {};
+        const plants = data ? (JSON.parse(data) as StoragePlantProps) : {} as StoragePlantProps;
 
         const plantsSorted = Object
             .keys(plants)
@@ -69,7 +78,8 @@ export async function loadPlant(): Promise<PlantProps[]> {
 
         return plantsSorted;
     } catch (error) {
-        throw new Error(error);
+        console.log(error);
+
     }
 }
 
@@ -83,6 +93,24 @@ export async function removePlant(id: string): Promise<void> {
             JSON.stringify(plants)
         );
     } catch (error) {
-        throw new Error(error);
+        console.log(error);
+
+    }
+}
+
+export async function saveUser(user: Google.GoogleUser): Promise<void> {
+    try {
+        await AsyncStorage.setItem('@iplant:user', JSON.stringify(user));
+        const data = await AsyncStorage.getItem('@iplant:user');
+    } catch (error) {
+        console.log(error);
+    }
+}
+export async function getUser(): Promise<Google.GoogleUser> {
+    try {
+        const data = await AsyncStorage.getItem('@iplant:user');
+        return data ? (JSON.parse(data) as Google.GoogleUser) : {} as Google.GoogleUser;
+    } catch (error) {
+        console.log(error);
     }
 }

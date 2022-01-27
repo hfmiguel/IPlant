@@ -24,7 +24,7 @@ interface EnvironmentProps {
 }
 
 export function PlantSelect() {
-    
+
     const [environment, setEnvironment] = useState<EnvironmentProps[]>([]);
     const [plants, setPlants] = useState<PlantProps[]>([]);
     const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([]);
@@ -45,7 +45,7 @@ export function PlantSelect() {
 
         if (envValue === "all")
             return setFilteredPlants(plants);
-        
+
         const filtered = plants.filter(plant =>
             plant.environments.includes(envValue)
         );
@@ -57,9 +57,9 @@ export function PlantSelect() {
         try {
             const { data } = await api.get(`plants?_sort=name&_order=asc&_page=${page}&_limit=8`);
 
-            if (!data) 
+            if (!data)
                 return setLoading(true);
-            
+
             if (page > 1) {
                 setPlants(oldValue => [...oldValue, ...data]);
                 setFilteredPlants(oldValue => [...oldValue, ...data]);
@@ -109,8 +109,8 @@ export function PlantSelect() {
     }, []);
 
     if (loading)
-        return <Load/>
-    
+        return <Load />
+
     return (
         <View style={styles.container}>
 
@@ -133,7 +133,7 @@ export function PlantSelect() {
                     renderItem={({ item }) => (
                         <EnvironmentButton title={item.title}
                             active={item.key === environmentSelected}
-                            onPress={ () => handleEnvironmentSelected(item.key) }
+                            onPress={() => handleEnvironmentSelected(item.key)}
                         />
                     )}
                     horizontal
@@ -141,7 +141,8 @@ export function PlantSelect() {
                     contentContainerStyle={styles.environmentList}
                 />
             </View>
-              <View style={styles.plants}>
+
+            <View style={styles.plants}>
                 <FlatList
                     data={filteredPlants}
                     keyExtractor={(item) => String(item.id)}
@@ -154,7 +155,7 @@ export function PlantSelect() {
                     onEndReachedThreshold={0.1}
                     onEndReached={({ distanceFromEnd }) => handleFetchMore(distanceFromEnd)}
                     ListFooterComponent={
-                        loadMore 
+                        loadMore
                             ? <ActivityIndicator color={colors.purple} />
                             : <></>
                     }
@@ -167,7 +168,6 @@ export function PlantSelect() {
 
 
 const styles = StyleSheet.create({
-
     container: {
         flex: 1,
         backgroundColor: colors.background,
@@ -196,10 +196,11 @@ const styles = StyleSheet.create({
     },
     plants: {
         flex: 1,
-        paddingHorizontal: 32,
-        justifyContent: 'center'
+        width: '100%',
+        paddingHorizontal: 20,
+        justifyContent: 'space-around',
     },
     plantsList: {
-        
+
     }
 })

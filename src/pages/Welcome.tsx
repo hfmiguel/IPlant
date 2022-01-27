@@ -21,19 +21,13 @@ export function Welcome() {
     const navigation = useNavigation();
 
     async function navigate() {
-
         const data = await AsyncStorage.getItem('@iplant:user');
-
-        console.log("Data :", data);
-
         if (typeof data != undefined && data != "" && data != null) {
             navigation.navigate('LoggedUser');
         } else {
             navigation.navigate('UserIdentification');
         }
     }
-
-
 
     return (
         <SafeAreaView style={styles.container}>
@@ -54,7 +48,7 @@ export function Welcome() {
                 <Text style={styles.subtitle}>
                     Não esqueça mais de regar suas plantas.
                     Nós cuidamos de lembrar você sempre-
-            </Text>
+                </Text>
 
                 <TouchableOpacity
                     style={styles.button}
@@ -101,7 +95,7 @@ const styles = StyleSheet.create({
         // width: 250,
     },
     button: {
-        backgroundColor: colors.green,
+        backgroundColor: colors.purple,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 16,

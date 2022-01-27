@@ -10,7 +10,6 @@ import { formatDistance } from 'date-fns';
 import { pt } from 'date-fns/locale';
 import { PlantCardSecondary } from '../Components/PlantCardSecondary';
 import { Load } from '../Components/Load';
-import { Toasts } from '../Components/Toast';
 
 export function MyPlants() {
     const [myPlants, setMyPlants] = useState<PlantProps[]>([]);
@@ -33,7 +32,7 @@ export function MyPlants() {
                             oldData.filter((item) => item.id !== plant.id)
                         ));
                     } catch (error) {
-                        
+
                     }
                 }
             }
@@ -58,7 +57,7 @@ export function MyPlants() {
                     setMyPlants(plantsStoraged);
                 }
 
-                setLoading(false); 
+                setLoading(false);
             } catch (error) {
                 console.log(error);
             }

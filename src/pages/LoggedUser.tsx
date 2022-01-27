@@ -16,7 +16,7 @@ import { useNavigation } from '@react-navigation/core';
 export function LoggedUser() {
 
     const navigation = useNavigation();
-  
+
     function handlePlantSelect() {
         navigation.navigate("PlantSelect");
     }
@@ -34,10 +34,6 @@ export function LoggedUser() {
                 <Text style={styles.title}>
                     Que bom termos você de volta!
                 </Text>
-
-                {/* <Text style={styles.subtitle}>
-                    {subtitle}
-                </Text> */}
 
                 <View style={styles.footer}>
                     <Button title={'Continuar'} onPress={handlePlantSelect} />

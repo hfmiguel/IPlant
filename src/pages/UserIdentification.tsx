@@ -1,11 +1,7 @@
-import React, { useState , useEffect } from "react";
-
+import React from "react";
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
-import { useNavigation } from '@react-navigation/core';
-import { Toasts } from "../Components/Toast";
-import { Button } from '../Components/Button';
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import { FacebookLogin, GoogleLogin } from '../Components/SocialButton';
 
 import {
     KeyboardAvoidingView,
@@ -13,7 +9,6 @@ import {
     SafeAreaView,
     StyleSheet,
     Text,
-    TextInput,
     View,
     TouchableWithoutFeedback,
     Keyboard
@@ -21,67 +16,6 @@ import {
 
 
 export function UserIdentification() {
-
-    const [isFocused, setIsFocused] = useState(false);
-    const [isFilled, setIsFilled] = useState(false);
-    const [isToastActive, setIsToastActive] = useState(false);
-    const [name, setName] = useState<string>();
-
-    const navigation = useNavigation();
-
-    function handleInputBlur() {
-        setIsFocused(false);
-        setIsFilled(!!name);
-    }
-
-    function handleInputFocus() {
-        setIsFocused(true);
-    }
-
-    function handleInputChange(value: string) {
-        setIsFilled(!!value);
-        setName(value);
-    }
-
-    function handleViewToast(value: boolean) {
-        setIsToastActive(value);
-    }
-
-
-    async function handleConfirmar() {
-        if (!name) {
-            return Toasts({
-                type: "error",
-                title: "Ops! 😯",
-                content: "Antes de prosseguir, nos informe o seu nome",
-                position: "top",
-                onHide: () => handleViewToast(false),
-                onShow: () => handleViewToast(true),
-            });
-        }
-
-        try {
-
-            await AsyncStorage.setItem("@iplant:user", name);
-            navigation.navigate('Confirmation', {
-                title: 'Prontinho',
-                subtitle: `Agora vamos começar a cuidar das suas\nplantinhas com muito carinho`,
-                icon:'🥰',
-                buttonTitle:'Começar',
-                nextScreen:'PlantSelect'
-            });
-        } catch (error) {
-            return Toasts({
-                type: "error",
-                title: "Ops! 😯",
-                content: "Falha ao salvar o seu nome. Por favor , tente novamente.",
-                position: "top",
-                onHide: () => handleViewToast(false),
-                onShow: () => handleViewToast(true),
-            });
-        }
-
-    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -94,32 +28,21 @@ export function UserIdentification() {
                     <View style={styles.content}>
                         <View style={styles.form}>
                             <View style={styles.header}>
-
                                 <Text style={styles.emoji}>
-                                    {isFilled ? '😄' : '😆'}
+                                    😄
                                 </Text>
 
                                 <Text style={styles.title}>
-                                    Como podemos {'\n'}
-                                    chamar você ?
+                                    Faça login para continuar
                                 </Text>
-
-                                <TextInput
-                                    style={[
-                                        styles.input,
-                                        (isFocused || isFilled) &&
-                                        { borderColor: colors.green }
-                                    ]}
-                                    placeholder="Digite seu nome"
-                                    onBlur={handleInputBlur}
-                                    onFocus={handleInputFocus}
-                                    onChangeText={handleInputChange}
-                                />
-
-                                <View style={styles.footer}>
-                                    <Button title={"Confirmar"} onPress={handleConfirmar} />
+                            </View>
+                            <View style={styles.buttons}>
+                                <View style={styles.button}>
+                                    <FacebookLogin />
                                 </View>
-
+                                <View style={styles.button}>
+                                    <GoogleLogin />
+                                </View>
                             </View>
                         </View>
                     </View>
@@ -179,5 +102,20 @@ const styles = StyleSheet.create({
     header: {
         alignItems: 'center',
         width: '100%',
-    }
+    },
+    buttons: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        width: '100%',
+        marginTop: 20,
+        backgroundColor: colors.shape,
+        borderRadius: 10,
+        paddingVertical: 20,
+    },
+    button: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 10,
+        paddingVertical: 10,
+    },
 })

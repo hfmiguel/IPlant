@@ -3,18 +3,36 @@ version: "3.8"
 services:
 
   iplant-app:
-    image: 271217/felix-node-npm
+    image: 271217/felix-node-npm:1.3
     container_name: iplant-app
     restart: unless-stopped
     volumes:
       - .:/opt
-    entrypoint: ["/bin/sh","-c"]
+    entrypoint: [ "/bin/sh", "-c" ]
     command:
       - -c
       - |
-        export env REACT_NATIVE_PACKAGER_HOSTNAME=fxdev.pt
-        npm start
+        expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD 
+        expo start -c --port 19001 --no-dev --minify
+    environment:
+      - REACT_NATIVE_PACKAGER_HOSTNAME=iplant.fxdev.pt
+      - EXPO_DEVTOOLS_LISTEN_ADDRESS=0.0.0.0
     ports:
-      - 19006:19006
+      - 19000:19000
       - 19001:19001
       - 19002:19002
+      - 19006:19006
+  
+  iplant-app-build:
+    image: 271217/felix-node-npm:1.3
+    container_name: iplant-app-build
+    restart: unless-stopped
+    volumes:
+      - .:/opt
+    entrypoint: [ "/bin/sh", "-c" ]
+    command:
+      - -c
+      - |
+        expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD 
+        yes | expo build:android -t apk --no-wait
+        ps -afx | grep sleep | xargs kill -9
